@@ -1,0 +1,294 @@
+<!-- Modelo de Metadata para Monitoreo Electoral -->
+<!--	Rev 0.5
+<!--	Autor: S41nz
+<!--	2015
+<!--											-->	 
+
+<Metadata_Monitor_Electoral>
+
+<Elecciones>
+<Descripcion>Representa el proceso de unas elecciones a ser monitoreadas<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Nombre" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Periodo" tipo="Fecha" cardinalidad="1"/>
+</Atributos>
+</Elecciones>
+
+<Entidad>
+<Descripcion>Representa una entidad a cualquier nivel geográfico y político en el cual se celebran unas elecciones determinadas<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Nombre" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Categoría" tipo="CategoríaEntidad" cardinalidad="1"/>
+<Atributo id="Candidatos" tipo="Candidato" cardinalidad="1..N"/>
+<Atributo id="Entidades" tipo="Entidad" cardinalidad="0..N"/>
+</Atributos>
+</Entidad>
+
+<CategoríaEntidad>
+<Descripcion>Representa los diferentes tipos de entidad que puede haber<Descripcion>
+<Enumeracion>
+<Valor id="País"/>
+<Valor id="Estado"/>
+<Valor id="Municipio"/>
+<Valor id="Distrito"/>
+</Enumeracion>
+</CategoríaEntidad>
+
+<Candidato>
+<Descripcion>Representa el perfil completo de un individuo que es candidato para un cargo público<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="InfoPartido" tipo="PerfilPartido" cardinalidad="1"/>
+<Atributo id="InfoBasica" tipo="PerfilBasico" cardinalidad="1"/>
+<Atributo id="InfoPlataforma" tipo="PerfilPlataforma" cardinalidad="1"/>
+<Atributo id="InfoAcademica" tipo="PerfilAcademico" cardinalidad="1"/>
+<Atributo id="InfoProfesional" tipo="PerfilProfesional" cardinalidad="1"/>
+<Atributo id="InfoContacto" tipo="PerfilContacto" cardinalidad="1..N"/>
+<Atributo id="InfoVirtual" tipo="PerfilVirtual" cardinalidad="0..N"/>
+<Atributo id="InfoAfiliaciones" tipo="PerfilAfiliaciones" cardinalidad="1"/>
+<Atributo id="InfoPrensa" tipo="PerfilPrensa" cardinalidad="1"/>
+<Atributo id="EquipoTrabajo" tipo="Candidato" cardinalidad="0..N"/>
+<Atributo id="EquipoApoyo" tipo="Candidato" cardinalidad="0..N"/>
+</Atributos>
+</Candidato>
+
+<PerfilPartido>
+<Descripcion>Representa el perfil de un Partido Político al cual estan afiliados 1 o más candidatos<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Nombre" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Siglas" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Ala" tipo="CategoriaAla" cardinalidad="1"/>
+<Atributo id="Reseña" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Logo" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</PerfilPartido>
+
+<CategoriaAla>
+<Descripcion>Representa una simple graduación en cuanto a la inclinación ideológica de un individuo o institución<Descripcion>
+<Enumeracion>
+<Valor id="Ultra izquierda"/>
+<Valor id="Izquierda moderada"/>
+<Valor id="Centro"/>
+<Valor id="Derecha moderada"/>
+<Valor id="Ultra derecha"/>
+</Enumeracion>
+</CategoriaAla>
+
+<PerfilBasico>
+<Descripcion>Representa la información básica de un candidato<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Nombre" tipo="Texto" cardinalidad="1"/>
+<Atributo id="FechaNacimiento" tipo="Fecha" cardinalidad="1"/>
+<Atributo id="Ala" tipo="CategoriaAla" cardinalidad="1"/>
+<Atributo id="EstadoCivil" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Imagen" tipo="Texto" cardinalidad="1"/>
+<Atributo id="TipoCandidatura" tipo="CategoriaCandidatura" cardinalidad="1"/>
+<Atributo id="Reseña" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</PerfilBasico>
+
+<CategoriaCandidatura>
+<Descripcion>Representa una simple graduación en cuanto a la inclinación ideológica de un individuo o institución<Descripcion>
+<Enumeracion>
+<Valor id="Presidente"/>
+<Valor id="Gobernador"/>
+<Valor id="Presidente municipal"/>
+<Valor id="Alcalde"/>
+<Valor id="Senador"/>
+<Valor id="Diputado local"/>
+<Valor id="Diputado federal"/>
+</Enumeracion>
+</CategoriaCandidatura>
+
+<PerfilAcademico>
+<Descripcion>Representa información respecto a la trayectoria académica de un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="GradoActual" tipo="CategoriaGradoAcademico" cardinalidad="1"/>
+<Atributo id="Trayectoria" tipo="Educacion" cardinalidad="0..N"/>
+</Atributos>
+</PerfilAcademico>
+
+<CategoriaGradoAcademico>
+<Descripcion>Representa una simple graduación de para describir grados académicos<Descripcion>
+<Enumeracion>
+<Valor id="Preescolar"/>
+<Valor id="Primaria"/>
+<Valor id="Secundaria"/>
+<Valor id="Preparatoria"/>
+<Valor id="Licenciatura"/>
+<Valor id="Maestría"/>
+<Valor id="Doctorado"/>
+<Valor id="Post Doctorado"/>
+<Valor id="Diplomado"/>
+<Valor id="Especialidad"/>
+</Enumeracion>
+</CategoriaGradoAcademico>
+
+<Educacion>
+<Descripcion>Representa información respecto a un evento determinado que comprende la trayectoria académica de un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Grado" tipo="CategoriaGradoAcademico" cardinalidad="1"/>
+<Atributo id="Institucion" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Inicio" tipo="Fecha" cardinalidad="1"/>
+<Atributo id="Terminación" tipo="Fecha" cardinalidad="1"/>
+<Atributo id="Descripción" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Logo" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</Educacion>
+
+<PerfilProfesional>
+<Descripcion>Representa información respecto a la trayectoria profesional de un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="CargoActual" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Trayectoria" tipo="Cargo" cardinalidad="0..N"/>
+</Atributos>
+</PerfilProfesional>
+
+<Cargo>
+<Descripcion>Representa información respecto a un evento determinado que comprende la trayectoria profesional de un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Sector" tipo="CategoriaSector" cardinalidad="1"/>
+<Atributo id="Organización" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Cargo" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Inicio" tipo="Fecha" cardinalidad="1"/>
+<Atributo id="Terminación" tipo="Fecha" cardinalidad="1"/>
+<Atributo id="Descripción" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Logo" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</Cargo>
+
+<CategoriaSector>
+<Descripcion>Representa una simple graduación de para describir el tipo de cargo desempeñado a nivel institucional<Descripcion>
+<Enumeracion>
+<Valor id="Publico"/>
+<Valor id="Privado"/>
+</Enumeracion>
+</CategoriaSector>
+
+<PerfilContacto>
+<Descripcion>Representa información respecto a diferentes maneras de contactar que tiene un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="TipoContacto" tipo="CategoriaContacto" cardinalidad="1"/>
+<Atributo id="Contacto" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Descripción" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</PerfilContacto>
+
+<CategoriaContacto>
+<Descripcion>Representa una simple clasificación para las diversas maneras convencionales de ponerse en contacto con un candidato determinado<Descripcion>
+<Enumeracion>
+<Valor id="Teléfono"/>
+<Valor id="Domicilio"/>
+<Valor id="e-mail"/>
+</Enumeracion>
+</CategoriaContacto>
+
+<PerfilVirtual>
+<Descripcion>Representa información respecto a diferentes maneras en las que un candidato determinado esta dado de alta en Internet<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="TipoCuenta" tipo="CategoriaCuenta" cardinalidad="1"/>
+<Atributo id="NombreUsuario" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Url" tipo="Texto" cardinalidad="1"/>
+<Atributo id="AppID" tipo="Texto" cardinalidad="1"/>
+<Atributo id="AdditionalData" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</PerfilVirtual>
+
+<CategoriaCuenta>
+<Descripcion>Representa una clasificación para los diversos tipos de perfiles virtuales que estan soportados<Descripcion>
+<Enumeracion>
+<Valor id="Facebook"/>
+<Valor id="Twitter"/>
+<Valor id="Instangram"/>
+<Valor id="Google+"/>
+</Enumeracion>
+</CategoriaCuenta>
+
+<PerfilAfiliaciones>
+<Descripcion>Representa información respecto a diferentes afiliaciones que tiene actualmente un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Afiliaciones" tipo="Afiliacion" cardinalidad="0..N"/>
+</Atributos>
+</PerfilAfiliaciones>
+
+<Afiliacion>
+<Descripcion>Representa información respecto a una afiliación que tiene actualmente un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="NombreInstitucion" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Descripción" tipo="Texto" cardinalidad="1"/>
+<Atributo id="URL" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</Afiliacion>
+
+<PerfilPrensa>
+<Descripcion>Representa información respecto a la prensa que tiene un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Noticias" tipo="Noticia" cardinalidad="1..N"/>
+<Atributo id="WordCloud" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Sentimiento" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</PerfilPrensa>
+
+<Noticia>
+<Descripcion>Representa una noticia determinada que hace referencia a uno o más candidatos<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Título" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Contenido" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Fuente" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Fecha" tipo="Fecha" cardinalidad="1"/>
+</Atributos>
+</Noticia>
+
+
+<PerfilPlataforma>
+<Descripcion>Representa información respecto a la plataforma de propuestas que plantea un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="Propuestas" tipo="Propuesta" cardinalidad="1..N"/>
+<Atributo id="WordCloud" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Sentimiento" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</PerfilPlataforma>
+
+<Propuesta>
+<Descripcion>Representa una propuesta correspondiente a la plataforma de un candidato determinado<Descripcion>
+<Atributos>
+<Atributo id="ID" tipo="Número" cardinalidad="1"/>
+<Atributo id="TipoPropuesta" tipo="CategoríaPropuesta" cardinalidad="1..N"/>
+<Atributo id="Titulo" tipo="Texto" cardinalidad="1"/>
+<Atributo id="Descripción" tipo="Texto" cardinalidad="1"/>
+</Atributos>
+</Propuesta>
+
+<CategoríaPropuesta>
+<Descripcion>Representa una clasificación para los diversos tipos de propuestas que puede tener una plataforma<Descripcion>
+<Enumeracion>
+<Valor id="Seguridad"/>
+<Valor id="Salud"/>
+<Valor id="Educación"/>
+<Valor id="Vivienda"/>
+<Valor id="Movilidad"/>
+<Valor id="Economía"/>
+<Valor id="Política"/>
+<Valor id="Infraestructura"/>
+<Valor id="Desarrollo Social"/>
+</Enumeracion>
+</CategoríaPropuesta>
+
+</Metadata_Monitor_Electoral>
+
+
