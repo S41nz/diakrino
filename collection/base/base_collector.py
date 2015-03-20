@@ -18,6 +18,9 @@ class BaseCollector:
     
     #Diccionario para las opciones que haya para un colector determinado
     collectionOptions = {}
+    
+    #Diccionario para documentar y poder comunicar las opciones de colección soportadas por un colector determinado
+    supportedCollectionOptions = {}
 
     def __init__(self, params):
         '''
@@ -40,7 +43,12 @@ class BaseCollector:
         e.g. un filtro sobre los datos
         '''
         self.collectionOptions = options
-        
+    
+    def getSupportedCollectionOptions(self):
+        '''
+        Método que comunica cuales son las opciones soportadas por el colector
+        '''
+        return self.supportedCollectionOptions
         
     def getData(self):
         '''

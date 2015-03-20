@@ -7,8 +7,8 @@ Enumeración para determinar los tipos posibles en los que se puede encontrar un 
 
 class ColeccionStatus:
 
-     #Enumeraciones
-     #Estado para definir que apenas se creó la instancia de 
+    #Enumeraciones
+    #Estado para definir que apenas se creó la instancia de 
     CREADO = "Creado" 
     #Este estado debe de establecerse despues de completar la llamada a initialize()
     LISTO = "Listo"
