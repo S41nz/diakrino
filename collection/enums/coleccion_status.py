@@ -20,5 +20,7 @@ class ColeccionStatus:
     ERROR = "Terminado con errores"
     #Estado para notificar que se terminó la colección con advertencias (errores no graves)
     ADVERTENCIA = "Terminado con advertencias"
+    #Estado oara notificar un Timeout o hang
+    TIMEOUT = "Timeout"
     
 

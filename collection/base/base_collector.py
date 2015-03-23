@@ -5,8 +5,11 @@ Definición de un colector de datos abstracto para poder extraer información requ
 @author: SA1nz
 '''
 
+from abc import  ABCMeta, abstractmethod
+
 class BaseCollector:
     
+    __metaclass__ = ABCMeta
     '''
     Atributos
     '''
@@ -26,12 +29,12 @@ class BaseCollector:
         '''
         Constructor
         '''
-    
+    @abstractmethod
     def initialize(self):
         '''
         Método para ejecutarse previo a la collección de datos
         '''
-    
+    @abstractmethod
     def collect(self):
         '''
         Definición de método para llevar a cabo la colección de datos en base a los parametros previamente mandados
@@ -49,7 +52,8 @@ class BaseCollector:
         Método que comunica cuales son las opciones soportadas por el colector
         '''
         return self.supportedCollectionOptions
-        
+    
+    @abstractmethod    
     def getData(self):
         '''
         Definición de método para obtener los datos recolectados
