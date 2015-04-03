@@ -6,14 +6,14 @@
 
 <Metadata_Monitor_Electoral>
 
-<Elecciones>
+<ProcesoElectoral>
 <Descripcion>Representa el proceso de unas elecciones a ser monitoreadas<Descripcion>
 <Atributos>
 <Atributo id="ID" tipo="Número" cardinalidad="1"/>
 <Atributo id="Nombre" tipo="Texto" cardinalidad="1"/>
 <Atributo id="Periodo" tipo="Fecha" cardinalidad="1"/>
 </Atributos>
-</Elecciones>
+</ProcesoElectoral>
 
 <Entidad>
 <Descripcion>Representa una entidad a cualquier nivel geográfico y político en el cual se celebran unas elecciones determinadas<Descripcion>
