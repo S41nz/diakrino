@@ -1,5 +1,5 @@
 <!-- Modelo de Metadata para Monitoreo Electoral -->
-<!--	Rev 0.5
+<!--	Rev 0.6
 <!--	Autor: S41nz
 <!--	2015
 <!--											-->	 
@@ -47,7 +47,7 @@
 <Atributo id="InfoProfesional" tipo="PerfilProfesional" cardinalidad="1"/>
 <Atributo id="InfoContacto" tipo="PerfilContacto" cardinalidad="1..N"/>
 <Atributo id="InfoVirtual" tipo="PerfilVirtual" cardinalidad="0..N"/>
-<Atributo id="InfoAfiliaciones" tipo="PerfilAfiliaciones" cardinalidad="1"/>
+<Atributo id="InfoAfiliaciones" tipo="Afiliacion" cardinalidad="0..N"/>
 <Atributo id="InfoPrensa" tipo="PerfilPrensa" cardinalidad="1"/>
 <Atributo id="EquipoTrabajo" tipo="Candidato" cardinalidad="0..N"/>
 <Atributo id="EquipoApoyo" tipo="Candidato" cardinalidad="0..N"/>
@@ -213,14 +213,6 @@
 <Valor id="Google+"/>
 </Enumeracion>
 </CategoriaCuenta>
-
-<PerfilAfiliaciones>
-<Descripcion>Representa información respecto a diferentes afiliaciones que tiene actualmente un candidato determinado<Descripcion>
-<Atributos>
-<Atributo id="ID" tipo="Número" cardinalidad="1"/>
-<Atributo id="Afiliaciones" tipo="Afiliacion" cardinalidad="0..N"/>
-</Atributos>
-</PerfilAfiliaciones>
 
 <Afiliacion>
 <Descripcion>Representa información respecto a una afiliación que tiene actualmente un candidato determinado<Descripcion>
