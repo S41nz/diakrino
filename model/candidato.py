@@ -10,7 +10,8 @@ class Candidato:
     '''
     Atributos
     '''
-
+    #Lista de perfiles de contacto que puede tener un candidato determinado
+    info_contacto = []
 
     def __init__(self, candidato_id):
         '''
@@ -45,6 +46,13 @@ class Candidato:
 
     def set_perfil_profesional(self, value):
         self.perfil_profesional = value
+
+    def get_info_contacto(self):
+        return self.info_contacto
+
+    def set_info_contacto(self, value):
+        self.info_contacto = value
+
 
     
 
