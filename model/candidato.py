@@ -16,15 +16,14 @@ class Candidato:
         '''
         Constructor
         '''
-        self.id = candidato_id  
+        self.id = candidato_id
+        self.perfil_profesional
         
     def get_id(self):
         return self.id
 
-
     def get_perfil_basico(self):
         return self.perfil_basico
-
 
     def set_perfil_basico(self, value):
         self.perfil_basico = value
@@ -32,16 +31,22 @@ class Candidato:
     def get_perfil_partido(self):
         return self.perfil_partido
 
-
     def set_perfil_partido(self, value):
         self.perfil_partido = value
 
     def get_perfil_academico(self):
         return self.perfil_academico
 
-
     def set_perfil_academico(self, value):
         self.perfil_academico = value
+
+    def get_perfil_profesional(self):
+        return self.perfil_profesional
+
+    def set_perfil_profesional(self, value):
+        self.perfil_profesional = value
+
+    
 
 
      
