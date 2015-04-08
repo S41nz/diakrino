@@ -16,8 +16,7 @@ class Candidato:
         '''
         Constructor
         '''
-        self.id = candidato_id
-        
+        self.id = candidato_id   
         
     def get_id(self):
         return self.id
@@ -29,3 +28,12 @@ class Candidato:
 
     def set_perfil_basico(self, value):
         self.perfil_basico = value
+
+    def get_perfil_partido(self):
+        return self.perfil_partido
+
+
+    def set_perfil_partido(self, value):
+        self.perfil_partido = value
+
+     
