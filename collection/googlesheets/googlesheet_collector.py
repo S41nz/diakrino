@@ -98,7 +98,7 @@ class GoogleSheetsCollector(BaseCollector):
             column_id = self.collectionOptions['keycolumn_id']
             search_term = self.collectionOptions['search_term']
 
-            for i,entry in enumerate(self.resultData.entry):
+            for entry in enumerate(self.resultData.entry):
                 if isinstance(self.resultData, gdata.spreadsheet.SpreadsheetsListFeed):
                     for key in entry.custom:
                         if key == column_id and entry.custom[key].text == search_term: 
