@@ -48,5 +48,5 @@ class ProcesoElectoral:
 
     def set_periodo(self, value):
         self.periodo = value
-    entidades = property(get_entidades, set_entidades, None, None)
+    
 
