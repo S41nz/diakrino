@@ -6,9 +6,10 @@ Created on 26/04/2015
 '''
 from cherrypy import wsgiserver
 from diakrino_flask import app
+import os
 
 diakrinoDispatcher = wsgiserver.WSGIPathInfoDispatcher({'/': app})
-server = wsgiserver.CherryPyWSGIServer(('45.33.6.16', 8080), diakrinoDispatcher)
+server = wsgiserver.CherryPyWSGIServer((os.environ['DIAKRINO_HOSTNAME'], os.environ['DIAKRINO_PORT']), diakrinoDispatcher)
 
 if __name__ == '__main__':
    try:
