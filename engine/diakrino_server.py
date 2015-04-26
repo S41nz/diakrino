@@ -3,6 +3,7 @@ import logging
 import datetime
 from engine.model_manager import ModelManager
 from engine.enums.engine_status import EngineStatus
+from engine.analysis_manager import AnalysisManager
 
 
 '''
@@ -34,6 +35,9 @@ class DiakrinoServer:
         #Actualmente por default instanciamos el model managers
         self.model_manager = ModelManager()
         
+        #Instanciamos el analysis manager
+        self.analysis_manager = AnalysisManager()
+        
         #Notificamos el status como inicializado
         self.status = EngineStatus.CREADO
         
@@ -48,6 +52,10 @@ class DiakrinoServer:
         
         #Refrescamos el status de la instancia
         self.status = self.model_manager.getStatus()
+        
+        #Cargamos el analysis manager
+        self.analysis_manager.initialize()
+        
     
     def getStatus(self):
         '''
@@ -88,4 +96,18 @@ class DiakrinoServer:
         
         #Finally attempt to return the result of the query
         return self.model_manager.getModel(model_id)
+    
+    def getAnalysisDataSet(self,dataSetID):
+        
+        #Check for the instance of the analysis manager
+        if self.analysis_manager is None:
+            return None
+        
+        #Attempt to send the data set
+        return self.analysis_manager.getDataSet(dataSetID)
+    
+    def getCurrentAnalysisDataSets(self):
+        #Retrieve the data sets that have been loaded with the Analysis Manager
+        return self.analysis_manager.getCurrentDataSets()
+        
         
