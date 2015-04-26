@@ -9,7 +9,7 @@ from diakrino_flask import app
 import os
 
 diakrinoDispatcher = wsgiserver.WSGIPathInfoDispatcher({'/': app})
-server = wsgiserver.CherryPyWSGIServer((os.environ['DIAKRINO_HOSTNAME'], os.environ['DIAKRINO_PORT']), diakrinoDispatcher)
+server = wsgiserver.CherryPyWSGIServer((os.environ['DIAKRINO_HOSTNAME'], int(os.environ['DIAKRINO_PORT'])), diakrinoDispatcher)
 
 if __name__ == '__main__':
    try:
