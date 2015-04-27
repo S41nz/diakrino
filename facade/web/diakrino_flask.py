@@ -41,6 +41,16 @@ def getSupportedCandidates():
     #Transform the output to a JSON string
     return str(json.dumps({'supported_candidates':supportedCandidates},default=json_util.default))
 
+@app.route("/diakrino/visual/twitter/followers/histogram/<candidateId>")
+def getCandidateTwitterFollowersHistogram(candidateId):
+    
+    result = str(json.dumps('invalid candidate ID',default=json_util.default))
+    
+    #Check for the received Candidate ID
+    if candidateId is None:
+        return str(json.dumps('invalid candidate ID',default=json_util.default))
+    
+    return result
 if __name__ == "__main__":
     app.run()
 
