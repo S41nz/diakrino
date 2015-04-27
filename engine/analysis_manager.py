@@ -38,9 +38,9 @@ class AnalysisManager:
         self.resultDataSets = {}
         
         #Load GDL candidates
-        self.loadDataSet('/diakrino_data/analysis/twitter/followers/AlfonsoPetersen.csv', '2015.gdl.alfonso_petersen.twitter.followers')
-        self.loadDataSet('/diakrino_data/analysis/twitter/followers/rvillanueval.csv', '2015.gdl.ricardo_villanueva.twitter.followers')
-        self.loadDataSet('/diakrino_data/analysis/twitter/followers/EnriqueAlfaroR.csv', '2015.gdl.enrique_alfaro.twitter.followers')
+        self.loadDataSet('/diakrino_data/analysis/twitter/followers/AlfonsoPetersen.csv', '2015.gdl.alfonso_petersen.twitter.followers.histogram')
+        self.loadDataSet('/diakrino_data/analysis/twitter/followers/rvillanueval.csv', '2015.gdl.ricardo_villanueva.twitter.followers.histogram')
+        self.loadDataSet('/diakrino_data/analysis/twitter/followers/EnriqueAlfaroR.csv', '2015.gdl.enrique_alfaro.twitter.followers.histogram')
         
         
     def loadDataSet(self,fileName,dataSetID):

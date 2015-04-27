@@ -52,8 +52,8 @@ def getCandidateTwitterFollowersHistogram(candidateId):
         return str(json.dumps('Invalid candidate ID',default=json_util.default))
     
     #Check for the status of Analysis Manager
-    if diakrinoServer.getStatus() != EngineStatus.EXITO:
-        return str(json.dumps('Not able to process the request :-( , try again later',default=json_util.default))
+    #if diakrinoServer.getStatus() != EngineStatus.EXITO:
+    #    return str(json.dumps('Not able to process the request :-( , try again later',default=json_util.default))
     
     #Construct the data set ID with the provided candidate name
     newDataSetID = '2015.gdl.'+candidateId+'.twitter.followers.histogram'
