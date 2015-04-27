@@ -64,13 +64,8 @@ def getCandidateTwitterFollowersHistogram(candidateId):
     if analysisDataSet is None:
         return str(json.dumps('Invalid candidate ID',default=json_util.default))
     
-    #If we have a data set then we transform it to a readable output
-    outputList = []
-    for row in analysisDataSet:
-        outputList.append(str(row))
-    
     #Convert the results to JSON format
-    result = str(json.dumps({'Candidate ID':candidateId,'Twitter followers histogram data':outputList},default=json_util.default))
+    result = str(json.dumps({'Candidate ID':candidateId,'Twitter followers histogram data':analysisDataSet},default=json_util.default))
     
     return result
 

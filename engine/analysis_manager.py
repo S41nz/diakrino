@@ -65,7 +65,13 @@ class AnalysisManager:
         
         #Check for collection result
         if analysisCollector.getStatus() == ColeccionStatus.EXITO:
-            self.resultDataSets[dataSetID] = analysisCollector.getData()
+            fileData = analysisCollector.getData()
+            resultDataSet = []
+            #Create the image in memory for the file content
+            for row in fileData:
+                resultDataSet.append(str(row))
+                
+            self.resultDataSets[dataSetID] = resultDataSet
     
         self.logger.info('Analysis data for data set ID: '+dataSetID+' has been completed')
     
