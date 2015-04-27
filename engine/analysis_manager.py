@@ -75,7 +75,11 @@ class AnalysisManager:
         if dataSetID is None:
             return None
         elif dataSetID is not None:
-            return self.resultDataSets[dataSetID]
+            #Check if the received key exists
+            if dataSetID in self.getCurrentDataSets():
+                return self.resultDataSets[dataSetID]
+            else:
+                return None
         
     def getCurrentDataSets(self):
             return self.resultDataSets.keys()

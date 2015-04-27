@@ -70,7 +70,7 @@ def getCandidateTwitterFollowersHistogram(candidateId):
         outputList.append(str(row))
     
     #Convert the results to JSON format
-    result = str(json.dumps({'Candidate ID':candidateId,'Twitter Followers Histogram Data':outputList},default=json_util.default))
+    result = str(json.dumps({'Candidate ID':candidateId,'Twitter followers histogram data':outputList},default=json_util.default))
     
     return result
 
