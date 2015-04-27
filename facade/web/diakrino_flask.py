@@ -6,6 +6,7 @@ Created on 06/04/2015
 @author: S41nz
 '''
 from engine.diakrino_server import DiakrinoServer
+from engine.enums.engine_status import EngineStatus
 
 import os
 import json
@@ -44,13 +45,35 @@ def getSupportedCandidates():
 @app.route("/diakrino/visual/twitter/followers/histogram/<candidateId>")
 def getCandidateTwitterFollowersHistogram(candidateId):
     
-    result = str(json.dumps('invalid candidate ID',default=json_util.default))
+    result = ""
     
     #Check for the received Candidate ID
     if candidateId is None:
-        return str(json.dumps('invalid candidate ID',default=json_util.default))
+        return str(json.dumps('Invalid candidate ID',default=json_util.default))
+    
+    #Check for the status of Analysis Manager
+    if diakrinoServer.getStatus() != EngineStatus.EXITO:
+        return str(json.dumps('Not able to process the request :-( , try again later',default=json_util.default))
+    
+    #Construct the data set ID with the provided candidate name
+    newDataSetID = '2015.gdl.'+candidateId+'.twitter.followers.histogram'
+    
+    #If valid then we proceed to query the data set to the analysis manager
+    analysisDataSet = diakrinoServer.getAnalysisDataSet(newDataSetID)
+    
+    if analysisDataSet is None:
+        return str(json.dumps('Invalid candidate ID',default=json_util.default))
+    
+    #If we have a data set then we transform it to a readable output
+    outputList = []
+    for row in analysisDataSet:
+        outputList.append(str(row))
+    
+    #Convert the results to JSON format
+    result = str(json.dumps({'Candidate ID':candidateId,'Twitter Followers Histogram Data':outputList},default=json_util.default))
     
     return result
+
 if __name__ == "__main__":
     app.run()
 
