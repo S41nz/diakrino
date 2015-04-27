@@ -45,7 +45,7 @@ class AnalysisManager:
         
     def loadDataSet(self,fileName,dataSetID):
         #Create the collection params
-        collectorParams = {'file_name':dataSetID}
+        collectorParams = {'file_path':dataSetID}
         #Instantiate the collector
         analysisCollector = CSVCollector(collectorParams)
         
