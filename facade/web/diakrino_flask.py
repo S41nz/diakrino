@@ -10,6 +10,8 @@ from engine.enums.engine_status import EngineStatus
 from analysis.analysis_dataset import AnalysisDataSet
 from model.proceso_electoral import ProcesoElectoral
 from model.entidad import Entidad
+from model.candidato import Candidato
+from model.perfil_basico import PerfilBasico
 
 import os
 import json
@@ -77,7 +79,71 @@ def getSupportedElectionEntities(processID):
         
     #If we have meaningful data then we send it back
     return str(json.dumps(result,default=json_util.default))
+
+@app.route("/diakrino/<processID>/<entityID>")
+def getEntityMetadata(processID,entityID):
+    #Check for Nones
+    if processID is None:
+        return str(json.dumps('ERROR: Invalid election process ID, please try again',default=json_util.default))
+    if entityID is None:
+        return str(json.dumps('ERROR: Invalid entity ID, please try again',default=json_util.default))
     
+    electionModel = diakrinoServer.getModel(processID)
+    
+    #Check for a valid process ID
+    if electionModel is None:
+        return str(json.dumps('ERROR: Invalid election process ID, please try again',default=json_util.default))
+    
+    currentEntities = electionModel.get_entidades()
+    
+    if currentEntities is None or len(currentEntities) == 0:
+        return str(json.dumps('No entities are assigned currently to this election process',default=json_util.default))
+    
+    #Check for ID existence within the entities
+    entityMatch = None
+    for loadedEntity in currentEntities:
+        if entityID == loadedEntity.get_entidad_id():
+            entityMatch = loadedEntity
+            break
+    
+    if entityMatch is None:
+        return str(json.dumps('ERROR: Invalid entity ID, please try again',default=json_util.default))
+    
+    #Otherwise we construct the result object and retrieve the result
+    result = {}
+    #ID
+    result['id'] = entityMatch.get_entidad_id()
+    #Name
+    result['name'] = entityMatch.get_nombre()
+    #Entity Type
+    result['type'] = entityMatch.get_tipo_entidad()
+    #Check for subentities if any
+    subEntities = entityMatch.get_subentidades()
+    #TODO: This needs to be a dictionary, not a list
+    if subEntities is not None and len(subEntities) > 0:
+        #Construct the list
+        subEntityList = {}
+        for subEntity in subEntities:
+            subEntityList[subEntity.get_entidad_id()] = subEntity.get_nombre()
+        #Just construct the directory with their immediate relationship
+        result['subentities'] = subEntityList
+    else:
+        result['subentities'] = 'None'
+    
+    #Check for candidates if any
+    candidates = entityMatch.get_candidatos()
+    
+    if candidates is not None and len(candidates) > 0:
+        candidatesList = {}
+        for candidate in candidates:
+            candidatesList[candidate.get_id()] = candidate.get_perfil_basico().get_nombre()
+        #Just construct the directory with their immediate relationship
+        result['candidates'] = candidatesList
+    else:
+        result['candidates'] = 'None'
+    
+    #Send the result
+    return str(json.dumps(result,default=json_util.default))
 '''
 API for Visualization Support
 '''
