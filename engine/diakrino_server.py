@@ -109,5 +109,11 @@ class DiakrinoServer:
     def getCurrentAnalysisDataSets(self):
         #Retrieve the data sets that have been loaded with the Analysis Manager
         return self.analysis_manager.getCurrentDataSets()
+    
+    def refreshAnalysisData(self):
+        #Launch a refresh request to the analysis manager
+        self.analysis_manager.refreshResultDataSet()
+        
+        
         
         

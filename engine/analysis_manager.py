@@ -6,9 +6,11 @@ Created on 26/04/2015
 @author: S41nz
 '''
 from engine.enums.engine_status import EngineStatus
-from model.enums.categoria_cuenta import CategoriaCuenta
 from collection.rawfiles.csv_collector import CSVCollector
 from collection.enums.coleccion_status import ColeccionStatus
+from analysis.enums.dataset_type import DataSetType
+from analysis.enums.dataset_status import DataSetStatus
+from analysis.analysis_dataset import AnalysisDataSet
 
 import logging
 
@@ -16,7 +18,11 @@ class AnalysisManager:
     '''
     Attributes
     '''
-    resultDataSets = {}
+    #Collection containing all the cacheable datasets from the data analysis process
+    dataSetsCache = {}
+    
+    #Directory that contains the references of the overall 
+    analysisDataSets = {}
 
 
     def __init__(self):
@@ -35,7 +41,7 @@ class AnalysisManager:
         
     def refreshResultDataSet(self):
         #Clean the dictionary
-        self.resultDataSets = {}
+        self.analysisDataSets = {}
         
         #Load GDL candidates
         self.loadDataSet('/diakrino_data/analysis/twitter/followers/AlfonsoPetersen.csv', '2015.gdl.alfonso_petersen.twitter.followers.histogram')
@@ -63,15 +69,24 @@ class AnalysisManager:
         #Collect the data
         analysisCollector.collect()
         
+        #Create the dataset, currently as Cacheable
+        newDataSet = AnalysisDataSet(dataSetID,DataSetType.CACHEABLE)
         #Check for collection result
         if analysisCollector.getStatus() == ColeccionStatus.EXITO:
             fileData = analysisCollector.getData()
-            resultDataSet = []
+            rawDataSet = []
+            newDataSet.set_data(rawDataSet)
+            newDataSet.set_status(DataSetStatus.LOADING)
             #Create the image in memory for the file content
             for row in fileData:
-                resultDataSet.append(str(row))
+                newDataSet.get_data().append(str(row))
                 
-            self.resultDataSets[dataSetID] = resultDataSet
+            #Refresh the correct status as refreshed
+            newDataSet.set_status(DataSetStatus.REFRESHED)
+            self.analysisDataSets[dataSetID] = newDataSet
+            
+            #Also add the reference to the dataset cache
+            self.dataSetsCache[dataSetID] = newDataSet
     
         self.logger.info('Analysis data for data set ID: '+dataSetID+' has been completed')
     
@@ -83,9 +98,9 @@ class AnalysisManager:
         elif dataSetID is not None:
             #Check if the received key exists
             if dataSetID in self.getCurrentDataSets():
-                return self.resultDataSets[dataSetID]
+                return self.analysisDataSets[dataSetID]
             else:
                 return None
         
     def getCurrentDataSets(self):
-            return self.resultDataSets.keys()
+            return self.analysisDataSets.keys()

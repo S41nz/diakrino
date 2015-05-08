@@ -69,6 +69,23 @@ def getCandidateTwitterFollowersHistogram(candidateId):
     
     return result
 
+@app.route("/diakrino/analysis/refresh/<password>")
+def refreshAnalsysData(password):
+    #Crapy  authentication in the meantime in order to prevent potential DoS attacks.
+    
+    #If parameter is None
+    if password is None:
+        return str(json.dumps('Not authorized to refresh',default=json_util.default))
+    
+    #If parameter is not correct
+    if password != os.environ['DIAKRINO_ADMIN_PWD']:
+        return str(json.dumps('Not authorized to refresh',default=json_util.default))
+    
+    #If the password is OK, then we refresh the analysis datasets
+    diakrinoServer.refreshAnalysisData()
+    
+    return str(json.dumps('Analysis data cache refreshed : )',default=json_util.default))
+    
 if __name__ == "__main__":
     app.run()
 
