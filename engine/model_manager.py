@@ -122,6 +122,9 @@ class ModelManager:
             self.logger.warn('Intento fallido de obtener el modelo con el id '+str(model_id)+' el ModelManager no estaba listo')
             return None
         
+        #Check for key existence
+        if model_id not in self.modelos.keys():
+            return None
         #Procesamos la solicitud
         return self.modelos[model_id]
         
