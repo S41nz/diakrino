@@ -8,6 +8,8 @@ Created on 06/04/2015
 from engine.diakrino_server import DiakrinoServer
 from engine.enums.engine_status import EngineStatus
 from analysis.analysis_dataset import AnalysisDataSet
+from model.proceso_electoral import ProcesoElectoral
+from model.entidad import Entidad
 
 import os
 import json
@@ -46,10 +48,36 @@ def getSupportedElectionProcesses():
     #Check for None or emptyness
     if currentModels is None or len(currentModels.items()) == 0:
         #Notify the user that no models have been loaded
-        return str(json.dumps('There are no models loaded currently :-(',default=json_util.default))
+        return str(json.dumps('ERROR: There are no models loaded currently :-(',default=json_util.default))
     
     #Otherwise we send the list
     return str(json.dumps(currentModels.items(),default=json_util.default))
+
+@app.route("/diakrino/<processID>/entities")
+def getSupportedElectionEntities(processID):
+    
+    if processID is None:
+        return str(json.dumps('ERROR: Invalid election process ID, please try again',default=json_util.default))
+    
+    electionModel = diakrinoServer.getModel(processID)
+    
+    #Check for a valid process ID
+    if electionModel is None:
+        return str(json.dumps('ERROR: Invalid election process ID, please try again',default=json_util.default))
+    
+    currentEntities = electionModel.get_entidades()
+    
+    if currentEntities is None or len(currentEntities) == 0:
+        return str(json.dumps('No entities are assigned currently to this election process',default=json_util.default))
+    
+    result = {}
+    #Capture the data into the result set
+    for entity in currentEntities:
+        result[entity.get_entidad_id()] = entity.get_nombre()
+        
+    #If we have meaningful data then we send it back
+    return str(json.dumps(result,default=json_util.default))
+    
 '''
 API for Visualization Support
 '''
