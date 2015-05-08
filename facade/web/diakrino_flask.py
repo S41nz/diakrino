@@ -22,6 +22,9 @@ app.config['PROPAGATE_EXCEPTIONS'] = True
 diakrinoServer = DiakrinoServer()
 diakrinoServer.initialize()
 
+'''
+Handshake API
+'''
 #Mensage de prueba
 @app.route("/test")
 def test():
@@ -32,6 +35,24 @@ def test():
 def hello():
     return "Hola desde Diakino"
 
+'''
+API for Metadata Support
+'''
+@app.route("/diakrino/elections")
+def getSupportedElectionProcesses():
+    
+    currentModels = diakrinoServer.getLoadedMetadataModels()
+    
+    #Check for None or emptyness
+    if currentModels is None or len(currentModels.items()) == 0:
+        #Notify the user that no models have been loaded
+        return str(json.dumps('There are no models loaded currently :-(',default=json_util.default))
+    
+    #Otherwise we send the list
+    return str(json.dumps(currentModels.items(),default=json_util.default))
+'''
+API for Visualization Support
+'''
 @app.route("/diakrino/visual/candidates")
 def getSupportedCandidates():
     #Extract the data sets
@@ -70,6 +91,9 @@ def getCandidateTwitterFollowersHistogram(candidateId):
     
     return result
 
+'''
+API for Data Analysis Support
+'''
 @app.route("/diakrino/analysis/refresh/<password>")
 def refreshAnalsysData(password):
     #Crapy  authentication in the meantime in order to prevent potential DoS attacks.
@@ -85,7 +109,7 @@ def refreshAnalsysData(password):
     #If the password is OK, then we refresh the analysis datasets
     diakrinoServer.refreshAnalysisData()
     
-    return str(json.dumps('Analysis data cache refreshed : )',default=json_util.default))
+    return str(json.dumps('Analysis data cache refreshed :-)',default=json_util.default))
     
 if __name__ == "__main__":
     app.run()
