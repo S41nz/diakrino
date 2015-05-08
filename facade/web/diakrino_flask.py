@@ -7,6 +7,7 @@ Created on 06/04/2015
 '''
 from engine.diakrino_server import DiakrinoServer
 from engine.enums.engine_status import EngineStatus
+from analysis.analysis_dataset import AnalysisDataSet
 
 import os
 import json
@@ -65,7 +66,7 @@ def getCandidateTwitterFollowersHistogram(candidateId):
         return str(json.dumps('Invalid candidate ID',default=json_util.default))
     
     #Convert the results to JSON format
-    result = str(json.dumps({'Candidate ID':candidateId,'Twitter followers histogram data':analysisDataSet},default=json_util.default))
+    result = str(json.dumps({'Candidate ID':candidateId,'Twitter followers histogram data':analysisDataSet.get_data()},default=json_util.default))
     
     return result
 
