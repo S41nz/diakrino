@@ -96,6 +96,9 @@ class ModelManager:
         self.modelos[proceso_id].get_entidades().append(entity)
         
         self.logger.info("Creada la metadata de la entidad: "+str(entidad_id) + " para el proceso electoral: "+str(proceso_id))
+        
+        #Request the loading of the candidates of that given entity
+        self.loadCandidates(entity)
     
     def loadCandidates(self,targetEntity):
         '''
