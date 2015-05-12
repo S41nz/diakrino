@@ -3,9 +3,12 @@ from engine.enums.engine_status import EngineStatus
 from model.proceso_electoral import ProcesoElectoral
 from model.entidad import Entidad
 from model.enums.categoria_entidad import CategoriaEntidad
+from collection.googlesheets.googlesheet_collector import GoogleSheetsCollector
+from collection.enums.coleccion_status import ColeccionStatus
 
 import logging
 import datetime
+import os
 
 '''
 Clase que se encarga de cargar, mantener y actualizar los modelos de metadata que estén disponibles para análisis y consulta
@@ -94,6 +97,31 @@ class ModelManager:
         
         self.logger.info("Creada la metadata de la entidad: "+str(entidad_id) + " para el proceso electoral: "+str(proceso_id))
     
+    def loadCandidates(self,targetEntity):
+        '''
+        Method to load all the metadata from the candidates
+        '''
+        
+        #Load all the parameters for the corresponding spreadsheet collector
+        collectorParams = {}
+        collectorParams['username'] = os.environ['DIAKRINO_GOOGLE_DRIVE_USERNAME']
+        collectorParams['password'] = os.environ['DIAKRINO_GOOGLE_DRIVE_PASSWORD']
+        collectorParams['source_id'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_SPREADSHEET_NAME']
+        collectorParams['spreadsheet_key'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_SPREADSHEET_KEY']
+        collectorParams['worksheet_id'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_WORKSHEET_ID']
+        
+        #Initialize the collector
+        spreadsheetCollector = GoogleSheetsCollector(collectorParams)
+        
+        spreadsheetCollector.initialize()
+        
+        #Collect the data
+        spreadsheetCollector.collect()
+        
+        if spreadsheetCollector.getStatus() == ColeccionStatus.EXITO:
+            #For the moment print the collected data on the console
+            spreadsheetCollector.printResult(spreadsheetCollector.getData())
+        
     def getModels(self):
         '''
         Método para obtener los modelos disponibles en la cache
