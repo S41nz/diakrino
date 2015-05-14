@@ -113,17 +113,23 @@ class ModelManager:
         collectorParams['spreadsheet_key'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_SPREADSHEET_KEY']
         collectorParams['worksheet_id'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_WORKSHEET_ID']
         
+        #print the variable values for debugging purposes
+        print 'DIAKRINO_GOOGLE_DRIVE_USERNAME: '+ collectorParams['username']
+        print 'DIAKRINO_GOOGLE_DRIVE_PASSWORD: '+ collectorParams['password']
+        print 'DIAKRINO_GOOGLE_DRIVE_CANDIDATES_SPREADSHEET_NAME: '+ collectorParams['source_id']
+        print 'DIAKRINO_GOOGLE_DRIVE_CANDIDATES_SPREADSHEET_KEY: '+ collectorParams['spreadsheet_key']
+        print 'DIAKRINO_GOOGLE_DRIVE_CANDIDATES_WORKSHEET_ID: '+ collectorParams['worksheet_id']
         #Initialize the collector
-        spreadsheetCollector = GoogleSheetsCollector(collectorParams)
+        #spreadsheetCollector = GoogleSheetsCollector(collectorParams)
         
-        spreadsheetCollector.initialize()
+        #spreadsheetCollector.initialize()
         
         #Collect the data
-        spreadsheetCollector.collect()
+        #spreadsheetCollector.collect()
         
-        if spreadsheetCollector.getStatus() == ColeccionStatus.EXITO:
+        #if spreadsheetCollector.getStatus() == ColeccionStatus.EXITO:
             #For the moment print the collected data on the console
-            spreadsheetCollector.printResult(spreadsheetCollector.getData())
+        #    spreadsheetCollector.printResult(spreadsheetCollector.getData())
         
     def getModels(self):
         '''
