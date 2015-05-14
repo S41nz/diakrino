@@ -51,11 +51,9 @@ class GoogleSheetsCollector(BaseCollector):
         self.googleDataClient = gdata.spreadsheet.service.SpreadsheetsService()
         #Establecemos los datos de autenticación para el acceso a los datos
         self.googleDataClient.email = self.collectorParams['username']
-        print 'received username: '+self.googleDataClient.email
         self.googleDataClient.password = self.collectorParams['password']
-        print 'received password: '+self.googleDataClient.password
         self.googleDataClient.source = self.collectorParams['source_id']
-        print 'received source: '+self.googleDataClient.source
+        
         #Default a login programático
         self.googleDataClient.ProgrammaticLogin()
         
