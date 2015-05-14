@@ -113,11 +113,17 @@ class ModelManager:
         collectorParams['spreadsheet_key'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_SPREADSHEET_KEY']
         collectorParams['worksheet_id'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_WORKSHEET_ID']
         
+        collectionOptions = {}
+        collectionOptions['keycolumn_id'] = 'municipio'
+        collectionOptions['search_term'] = targetEntity.get_nombre()
+        
         #Initialize the collector
         spreadsheetCollector = GoogleSheetsCollector(collectorParams)
         
+        
         spreadsheetCollector.initialize()
         
+        spreadsheetCollector.setCollectionOptions(collectionOptions)
         #Collect the data
         spreadsheetCollector.collect()
         
