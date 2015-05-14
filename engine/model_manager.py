@@ -128,8 +128,12 @@ class ModelManager:
         spreadsheetCollector.collect()
         
         if spreadsheetCollector.getStatus() == ColeccionStatus.EXITO:
+            
+            collectedEntries = spreadsheetCollector.getData()
+            for entry in collectedEntries:
+                print entry
             #For the moment print the collected data on the console
-            spreadsheetCollector.printResult(spreadsheetCollector.getData())
+            #spreadsheetCollector.printResult(spreadsheetCollector.getData())
         
     def getModels(self):
         '''

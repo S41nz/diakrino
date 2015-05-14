@@ -100,7 +100,6 @@ class GoogleSheetsCollector(BaseCollector):
             search_term = self.collectionOptions['search_term']
 
             for i, entry in enumerate(self.resultData.entry):
-                print entry
                 if isinstance(self.resultData, gdata.spreadsheet.SpreadsheetsListFeed):
                     for key in entry.custom:
                         if key == column_id and entry.custom[key].text == search_term: 
@@ -109,7 +108,7 @@ class GoogleSheetsCollector(BaseCollector):
                 
                     
          
-        
+            
             #Despues del filtrado asignamos el resultado final
             self.resultData = filteredResult
 
