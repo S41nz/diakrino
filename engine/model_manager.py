@@ -116,7 +116,7 @@ class ModelManager:
         collectionOptions = {}
         collectionOptions['keycolumn_id'] = 'municipio'
         collectionOptions['search_term'] = targetEntity.get_nombre()
-        
+        print 'Loading candidates from entity: '+ collectionOptions['search_term']
         #Initialize the collector
         spreadsheetCollector = GoogleSheetsCollector(collectorParams)
         
