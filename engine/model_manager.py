@@ -147,7 +147,7 @@ class ModelManager:
         '''
         
         #Consideremos los casos cuando no fue posible
-        if self.status != EngineStatus.LISTO:
+        if self.status != EngineStatus.LISTO and self.status != EngineStatus.ERROR:
             return {}
         
         #Considerando que si se pudo cargar el modelo, procesamos la solicitud
@@ -165,7 +165,7 @@ class ModelManager:
             return None
         
         #Checamos primero el estado interno de la instancia para verificar
-        if self.status != EngineStatus.LISTO:
+        if self.status != EngineStatus.LISTO and self.status != EngineStatus.ERROR:
             self.logger.warn('Intento fallido de obtener el modelo con el id '+str(model_id)+' el ModelManager no estaba listo')
             return None
         
