@@ -134,7 +134,7 @@ class ModelManager:
             collectedEntries = spreadsheetCollector.getData()
             
             #Go ahead and generate the corresponding Candidate model entities based on the data
-            candidateModelLoader = GooglesheetsCandidatoModelLoader(targetEntity.get_id())
+            candidateModelLoader = GooglesheetsCandidatoModelLoader(targetEntity.get_entidad_id())
             candidateModels = candidateModelLoader.loadModel(collectedEntries)
             
             #Finally append the models to the target entity
