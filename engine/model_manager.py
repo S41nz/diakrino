@@ -104,7 +104,7 @@ class ModelManager:
         '''
         Method to load all the metadata from the candidates
         '''
-        
+        self.logger.info("Loading the candidates data for the entity "+targetEntity.get_nombre())
         #Load all the parameters for the corresponding spreadsheet collector
         collectorParams = {}
         collectorParams['username'] = os.environ['DIAKRINO_GOOGLE_DRIVE_USERNAME']
@@ -114,9 +114,10 @@ class ModelManager:
         collectorParams['worksheet_id'] = os.environ['DIAKRINO_GOOGLE_DRIVE_CANDIDATES_WORKSHEET_ID']
         
         collectionOptions = {}
+        
         collectionOptions['keycolumn_id'] = 'municipio'
         collectionOptions['search_term'] = targetEntity.get_nombre()
-        print 'Loading candidates from entity: '+ collectionOptions['search_term']
+
         #Initialize the collector
         spreadsheetCollector = GoogleSheetsCollector(collectorParams)
         
@@ -130,6 +131,7 @@ class ModelManager:
         if spreadsheetCollector.getStatus() == ColeccionStatus.EXITO:
             
             collectedEntries = spreadsheetCollector.getData()
+            
             for entry in collectedEntries:
                 print entry
             #For the moment print the collected data on the console
