@@ -114,6 +114,10 @@ class DiakrinoServer:
         #Launch a refresh request to the analysis manager
         self.analysis_manager.refreshResultDataSet()
         
+    def refreshMetadataModel(self):
+        #Refresh the entire metadata model
+        self.model_manager.loadModel(True)
+        
         
         
         
