@@ -3,6 +3,7 @@ from engine.enums.engine_status import EngineStatus
 from model.proceso_electoral import ProcesoElectoral
 from model.entidad import Entidad
 from model.enums.categoria_entidad import CategoriaEntidad
+from model.loaders.googlesheets.googlesheet_candidato_loader import GooglesheetsCandidatoModelLoader
 from collection.googlesheets.googlesheet_collector import GoogleSheetsCollector
 from collection.enums.coleccion_status import ColeccionStatus
 
@@ -132,10 +133,13 @@ class ModelManager:
             
             collectedEntries = spreadsheetCollector.getData()
             
-            for entry in collectedEntries:
-                print entry
-            #For the moment print the collected data on the console
-            #spreadsheetCollector.printResult(spreadsheetCollector.getData())
+            #Go ahead and generate the corresponding Candidate model entities based on the data
+            candidateModelLoader = GooglesheetsCandidatoModelLoader(targetEntity.get_id())
+            candidateModels = candidateModelLoader.loadModel(collectedEntries)
+            
+            #Finally append the models to the target entity
+            targetEntity.set_candidatos(candidateModels)
+            self.logger.info("Loading the candidates data loaded")
         
     def getModels(self):
         '''
