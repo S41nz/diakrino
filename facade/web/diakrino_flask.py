@@ -136,6 +136,8 @@ def getEntityMetadata(processID,entityID):
     if candidates is not None and len(candidates) > 0:
         candidatesList = {}
         for candidate in candidates:
+            print candidate.get_id()
+            print candidate.get_perfil_basico().get_nombre()
             candidatesList[candidate.get_id()] = candidate.get_perfil_basico().get_nombre()
         #Just construct the directory with their immediate relationship
         result['candidates'] = candidatesList

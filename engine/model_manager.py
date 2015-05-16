@@ -142,10 +142,6 @@ class ModelManager:
           
             #Finally append the models to the target entity
             targetEntity.set_candidatos(candidateModels)
-            
-            for candidateModel in candidateModels:
-                print "ID del candidato "+candidateModel.get_id()
-                print "Nombre del candidato "+ candidateModel.get_perfil_basico().get_nombre()
                 
             self.logger.info("Loading the candidates data loaded")
         
