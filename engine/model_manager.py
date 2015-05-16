@@ -145,9 +145,8 @@ class ModelManager:
         '''
         Método para obtener los modelos disponibles en la cache
         '''
-        print self.status
         #Consideremos los casos cuando no fue posible
-        if self.status != EngineStatus.LISTO and self.status != EngineStatus.ERROR:
+        if self.status != EngineStatus.LISTO and self.status != EngineStatus.EXITO:
             return {}
         
         #Considerando que si se pudo cargar el modelo, procesamos la solicitud
@@ -165,7 +164,7 @@ class ModelManager:
             return None
         
         #Checamos primero el estado interno de la instancia para verificar
-        if self.status != EngineStatus.LISTO and self.status != EngineStatus.ERROR:
+        if self.status != EngineStatus.LISTO and self.status != EngineStatus.EXITO:
             self.logger.warn('Intento fallido de obtener el modelo con el id '+str(model_id)+' el ModelManager no estaba listo')
             return None
         
