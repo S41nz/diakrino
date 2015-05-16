@@ -220,7 +220,7 @@ def refreshMetadataModel(password):
     #If the password is OK, then we refresh the analysis datasets
     diakrinoServer.refreshMetadataModel()
     
-    return str(json.dumps('Analysis data cache refreshed :-)',default=json_util.default))
+    return str(json.dumps('Metadata model refreshed :-)',default=json_util.default))
     
 if __name__ == "__main__":
     app.run()

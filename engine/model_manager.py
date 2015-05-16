@@ -145,7 +145,7 @@ class ModelManager:
         '''
         Método para obtener los modelos disponibles en la cache
         '''
-        
+        print self.status
         #Consideremos los casos cuando no fue posible
         if self.status != EngineStatus.LISTO and self.status != EngineStatus.ERROR:
             return {}
