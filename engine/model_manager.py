@@ -58,6 +58,8 @@ class ModelManager:
         self.loadProcesoElectoral('PE_ZMG_2015', "Elecciones Intermedias ZMG 2015", nuevoPeriodo)
         
         #Load the entity instances
+        #Clean the entities before loading them   
+        self.modelos['PE_ZMG_2015'].set_entidades([])
         #Guadalajara
         self.loadEntidades('PE_ZMG_2015', 'GDL', 'Guadalajara', CategoriaEntidad.MUNICIPIO)
         #Zapopan
