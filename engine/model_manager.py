@@ -149,6 +149,7 @@ class ModelManager:
         if self.status != EngineStatus.LISTO and self.status != EngineStatus.EXITO:
             return {}
         
+        print "loaded models "+str(len(self.modelos))
         #Considerando que si se pudo cargar el modelo, procesamos la solicitud
         return self.modelos
         
