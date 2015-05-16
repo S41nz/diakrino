@@ -50,6 +50,8 @@ class ModelManager:
         '''
         #Notificamos que estamos cargando la información
         self.status = EngineStatus.PROCESANDO
+        #Reset the model collection
+        self.modelos = {}
         
         #Cargamos el modelo
         nuevoPeriodo = datetime.date(2015,06,01)
