@@ -56,6 +56,7 @@ class GooglesheetsCandidatoModelLoader(BaseLoader):
             
             for key in entry.custom:  
                 if key == 'nombre':
+                    print 'Candidate name received from the collector '+ entry.custom[key].text
                     newBasicProfile.set_nombre(entry.custom[key].text)
                 elif key == 'fecha de nacimiento':
                     newBasicProfile.set_fecha_de_nacimiento(entry.custom[key].text)
