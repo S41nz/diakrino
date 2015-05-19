@@ -144,6 +144,79 @@ def getEntityMetadata(processID,entityID):
     
     #Send the result
     return str(json.dumps(result,default=json_util.default))
+
+@app.route("/diakrino/<processID>/<entityID>/<candidateID>")
+def getCandidateBasicMetadata(processID,entityID,candidateID):
+    
+    #Check for Nones
+    if processID is None:
+        return str(json.dumps('ERROR: Invalid election process ID, please try again',default=json_util.default))
+    if entityID is None:
+        return str(json.dumps('ERROR: Invalid entity ID, please try again',default=json_util.default))
+    if candidateID is None:
+        return str(json.dumps('ERROR: Invalid candidate ID, please try again',default=json_util.default))
+    
+    electionModel = diakrinoServer.getModel(processID)
+    
+    #Check for a valid process ID
+    if electionModel is None:
+        return str(json.dumps('ERROR: Invalid election process ID, please try again',default=json_util.default))
+    
+    currentEntities = electionModel.get_entidades()
+    
+    if currentEntities is None or len(currentEntities) == 0:
+        return str(json.dumps('No entities are assigned currently to this election process',default=json_util.default))
+    
+    #Check for ID existence within the entities
+    entityMatch = None
+    for loadedEntity in currentEntities:
+        if entityID == loadedEntity.get_entidad_id():
+            entityMatch = loadedEntity
+            break
+    
+    if entityMatch is None:
+        return str(json.dumps('ERROR: Invalid entity ID, please try again',default=json_util.default))
+    
+    #Otherwise we construct the result object and retrieve the result
+    currentCandidates = entityMatch.get_candidatos()
+    
+    if currentCandidates is None or len(currentCandidates) == 0:
+        return str(json.dumps('No candidates are assigned currently to this entity',default=json_util.default))
+    
+    #Check for ID existence within the candidates
+    candidateMatch = None
+    for loadedCandidate in currentCandidates:
+        if candidateID == loadedCandidate.get_id():
+            candidateMatch = loadedCandidate
+            break
+    
+    if candidateMatch is None:
+        return str(json.dumps('ERROR: Invalid candidate ID, please try again',default=json_util.default))
+    
+    #Otherwise we construct the result object and retrieve the result
+    result = {}
+    
+    #ID of the candidate
+    result['id'] = candidateMatch.get_id()
+    #Name
+    result['name'] = candidateMatch.get_perfil_basico().get_nombre()
+    #Birth date
+    result['birth_date'] = candidateMatch.get_perfil_basico().get_fecha_de_nacimiento()
+    #Ideologic current
+    result['ideology'] = candidateMatch.get_perfil_basico().get_ala()
+    #Civil state
+    result['civil_state'] = candidateMatch.get_perfil_basico().get_estado_civil()
+    #Image URL
+    result['image_url'] = candidateMatch.get_perfil_basico().get_ruta_imagen()
+    #Charge type that is running for
+    result['charge_type'] = candidateMatch.get_perfil_basico().get_tipo_candidatura()
+    #Overview of the candidate
+    result['overview'] = candidateMatch.get_perfil_basico().get_resena()
+    #Get political party
+    result['party'] = candidateMatch.get_perfil_partido().get_siglas()
+    
+    #Send the result
+    return str(json.dumps(result,default=json_util.default))
 '''
 API for Visualization Support
 '''
