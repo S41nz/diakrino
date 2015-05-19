@@ -57,21 +57,21 @@ class GooglesheetsCandidatoModelLoader(BaseLoader):
             for key in entry.custom:  
                 if key == 'nombre':
                     newBasicProfile.set_nombre(entry.custom[key].text)
-                elif key == 'fecha de nacimiento':
+                elif key == 'fechadenacimiento':
                     newBasicProfile.set_fecha_de_nacimiento(entry.custom[key].text)
                 elif key == 'partido':
                     #Crete a new party profile
                     newPartido = PerfilPartido(new_id+"_PPARTIDO")
                     newPartido.set_siglas(entry.custom[key].text)
                     newCandidato.set_perfil_partido(newPartido)
-                elif key == 'estado civil':
+                elif key == 'estadocivil':
                     newBasicProfile.set_estado_civil(entry.custom[key].text)
-                elif key == 'maximo grado de estudios':
+                elif key == 'maximogradodeestudios':
                     #Create a new academic profile
                     newAcademicProfile = PerfilAcademico(new_id+"_PACADEMICO")
                     newAcademicProfile.set_grado_actual(entry.custom[key].text)
                     newCandidato.set_perfil_academico(newAcademicProfile)
-                elif key == 'url de imagen':
+                elif key == 'urldeimagen':
                     newBasicProfile.set_ruta_imagen(entry.custom[key].text)
                 elif key == 'reseña':
                     newBasicProfile.set_resena(entry.custom[key].text)
