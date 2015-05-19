@@ -73,7 +73,7 @@ class GooglesheetsCandidatoModelLoader(BaseLoader):
                     newCandidato.set_perfil_academico(newAcademicProfile)
                 elif key == 'urldeimagen':
                     newBasicProfile.set_ruta_imagen(entry.custom[key].text)
-                elif key == 'reseña':
+                elif key == 'resena':
                     newBasicProfile.set_resena(entry.custom[key].text)
                 
                 #Finally we add the basic profile into the candidate instance
