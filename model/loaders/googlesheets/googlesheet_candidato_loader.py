@@ -78,7 +78,10 @@ class GooglesheetsCandidatoModelLoader(BaseLoader):
                 
                 #Finally we add the basic profile into the candidate instance
                 newCandidato.set_perfil_basico(newBasicProfile)
-                
+            #Initialize all the unused attributes for the moment
+            newBasicProfile.set_ala('')
+            newBasicProfile.set_tipo_candidatura('')
+            
             #Add the instance to the list
             loadedModels.append(newCandidato)
                 
