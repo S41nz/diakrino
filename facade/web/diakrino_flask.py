@@ -203,7 +203,9 @@ def getCandidateBasicMetadata(processID,entityID,candidateID):
     #Birth date
     result['birth_date'] = candidateMatch.get_perfil_basico().get_fecha_de_nacimiento()
     #Ideologic current
-    result['ideology'] = candidateMatch.get_perfil_basico().get_ala()
+    candidateCurrent = candidateMatch.get_perfil_basico().get_ala()
+    if candidateCurrent is not None:
+        result['ideology'] = candidateMatch.get_perfil_basico().get_ala()
     #Civil state
     result['civil_state'] = candidateMatch.get_perfil_basico().get_estado_civil()
     #Image URL
